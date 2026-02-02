@@ -1,7 +1,14 @@
 package br.com.encurteMe.domain.exception;
 
 public class UrlNotFoundException extends RuntimeException {
-    public UrlNotFoundException(String urlEncurtada) {
-        super("Url Encurtada não encontrada ");
+    private final String codigoEncurtado;
+
+    public UrlNotFoundException(String codigoEncurtado) {
+        super("Url Encurtada não encontrada: " + codigoEncurtado);
+        this.codigoEncurtado = codigoEncurtado;
+    }
+
+    public String getCodigoEncurtado(){
+        return codigoEncurtado;
     }
 }
