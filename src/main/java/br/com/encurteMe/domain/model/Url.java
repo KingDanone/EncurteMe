@@ -1,5 +1,7 @@
 package br.com.encurteMe.domain.model;
 
+import br.com.encurteMe.domain.exception.InvalidUrlException;
+
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -25,7 +27,7 @@ public class Url {
             throw new IllegalArgumentException("URL não pode ser vazia");
         }
         if (url.startsWith("http://") || url.startsWith("https://")) {
-            throw new RuntimeException("URL deve começar com http:// ou https://");
+            throw new InvalidUrlException("URL deve começar com http:// ou https://");
         }
         return url;
     }
