@@ -4,16 +4,17 @@ import br.com.encurteMe.domain.exception.InvalidUrlException;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.UUID;
 
 
 public class Url {
-    private final Long id;
+    private final UUID id;
     private final String urlOriginal;
     private final String codigoEncurtado;
     private final LocalDateTime criadoEm;
     private final long clicks;
 
-    public Url(Long id, String urlOriginal, String urlEncurtada, LocalDateTime criadoEm, long clicks) {
+    public Url(UUID id, String urlOriginal, String urlEncurtada, LocalDateTime criadoEm, long clicks) {
         this.id = id;
         this.urlOriginal = validateUrl(urlOriginal);
         this.codigoEncurtado = Objects.requireNonNull(urlEncurtada,
@@ -40,7 +41,7 @@ public class Url {
         return new Url(id, urlOriginal, codigoEncurtado, criadoEm, clicks + 1);
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
