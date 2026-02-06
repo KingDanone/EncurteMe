@@ -12,7 +12,7 @@ public interface UrlWebMapper {
                 url.getId(),
                 url.getUrlOriginal(),
                 url.getCodigoEncurtado(),
-                "http://localhost:8080/api/v1/" + url.getCodigoEncurtado(),
+                "http://localhost:8080/api/" + url.getCodigoEncurtado(),
                 url.getCriadoEm(),
                 url.getClicks()
         );

@@ -7,6 +7,7 @@ import br.com.encurteMe.application.port.in.CreateShortUrlCase;
 import br.com.encurteMe.application.port.in.DeleteAllUseCase;
 import br.com.encurteMe.application.port.in.GetUrlUseCase;
 import br.com.encurteMe.application.port.in.GetAllUrlUseCase;
+import br.com.encurteMe.domain.model.Url;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -46,7 +47,7 @@ public class UrlController {
             description = "Recebe uma URL e retorna o código encurtado")
     public ResponseEntity<UrlDTO> shorten(@Valid @RequestBody UrlDTO request) {
         var codigoCurto = createUseCase.execute(request.urlOriginal());
-        var url = getUrlUseCase.execute(codigoCurto);
+        Url url = getUrlUseCase.execute(codigoCurto);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(mapper.toResponse(url));
@@ -56,7 +57,7 @@ public class UrlController {
     @Operation(summary = "Redireciona o usuario para o link original",
             description = "Recebe o codigo encurtado e redireciona o usuario para a URL original")
     public ResponseEntity<Void> redirect(@PathVariable String codigoEncurtado) {
-        var url = getUrlUseCase.execute(codigoEncurtado);
+        Url url = getUrlUseCase.execute(codigoEncurtado);
         return ResponseEntity
                 .status(HttpStatus.MOVED_PERMANENTLY)
                 .location(URI.create(url.getUrlOriginal()))
@@ -64,6 +65,8 @@ public class UrlController {
     }
 
     @DeleteMapping
+    @Operation(summary = "Deleta todas as URLs",
+            description = "Deleta todas as URLs salvas")
     public ResponseEntity<Void> deleteAll() {
         deleteAllUseCase.execute();
         return ResponseEntity.ok().build();

@@ -12,7 +12,8 @@ public class DeleteAllUrlsService implements DeleteAllUseCase {
     }
 
     @Override
-    public void execute() {
+    public Void execute() {
         repository.deleteAll();
+        return null;
     }
 }
