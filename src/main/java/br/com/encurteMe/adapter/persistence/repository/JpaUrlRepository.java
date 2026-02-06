@@ -4,9 +4,13 @@ import br.com.encurteMe.adapter.persistence.entities.UrlEntity;
 import br.com.encurteMe.adapter.persistence.mapper.UrlEntityMapper;
 import br.com.encurteMe.application.port.out.UrlRepositoryPort;
 import br.com.encurteMe.domain.model.Url;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class JpaUrlRepository implements UrlRepositoryPort {
 
     private final SpringDataUrlRepository repository;
@@ -25,13 +29,27 @@ public class JpaUrlRepository implements UrlRepositoryPort {
     }
 
     @Override
-    public Optional<Url> findByShortUrl(String codigoEncurtado) {
-        return repository.findByShortUrl(codigoEncurtado)
+    public Optional<Url> findByCodigoEncurtado(String codigoEncurtado) {
+        return repository.findByCodigoEncurtado(codigoEncurtado)
                 .map(mapper::toDomain);
     }
 
     @Override
     public boolean existsByCodigoEncurtado(String codigoEncurtado) {
-        return repository.existesByCodigoEncurtado(codigoEncurtado);
+        return repository.existsByCodigoEncurtado(codigoEncurtado);
+    }
+
+    @Override
+    public void deleteAll() {
+        repository.deleteAll();
+    }
+
+    @Override
+    public List<Url> findAll(int page, int size) {
+        PageRequest pageable = PageRequest.of(page, size);
+        return repository.findAll(pageable)
+                .stream()
+                .map(mapper::toDomain)
+                .toList();
     }
 }

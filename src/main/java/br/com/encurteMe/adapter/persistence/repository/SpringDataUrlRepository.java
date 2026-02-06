@@ -7,6 +7,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface SpringDataUrlRepository extends JpaRepository<UrlEntity, UUID> {
-    Optional<UrlEntity> findByShortUrl(String codigoCurto);
-    boolean existesByCodigoEncurtado(String codigoEncurtado);
+    Optional<UrlEntity> findByCodigoEncurtado(String codigoCurto);
+    boolean existsByCodigoEncurtado(String codigoEncurtado);
 }

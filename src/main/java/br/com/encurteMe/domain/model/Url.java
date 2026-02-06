@@ -14,10 +14,10 @@ public class Url {
     private final LocalDateTime criadoEm;
     private final long clicks;
 
-    public Url(UUID id, String urlOriginal, String urlEncurtada, LocalDateTime criadoEm, long clicks) {
+    public Url(UUID id, String urlOriginal, String codigoEncurtado, LocalDateTime criadoEm, long clicks) {
         this.id = id;
         this.urlOriginal = validateUrl(urlOriginal);
-        this.codigoEncurtado = Objects.requireNonNull(urlEncurtada,
+        this.codigoEncurtado = Objects.requireNonNull(codigoEncurtado,
                 "Url encurtada não pode ser null");
         this.criadoEm = criadoEm != null ? criadoEm : LocalDateTime.now();
         this.clicks = Math.max(0, clicks);
@@ -27,14 +27,14 @@ public class Url {
         if (url == null || url.isBlank()) {
             throw new IllegalArgumentException("URL não pode ser vazia");
         }
-        if (url.startsWith("http://") || url.startsWith("https://")) {
+        if (!url.startsWith("http://") && !url.startsWith("https://")) {
             throw new InvalidUrlException("URL deve começar com http:// ou https://");
         }
         return url;
     }
 
-    public static Url create(String urlOriginal, String urlEncurtada) {
-        return new Url(null, urlOriginal, urlEncurtada, LocalDateTime.now(), 0);
+    public static Url create(String urlOriginal, String codigoEncurtado) {
+        return new Url(null, urlOriginal, codigoEncurtado, LocalDateTime.now(), 0);
     }
 
     public Url incrementaClick() {

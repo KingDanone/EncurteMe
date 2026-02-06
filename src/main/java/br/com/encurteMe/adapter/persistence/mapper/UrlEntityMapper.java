@@ -10,4 +10,5 @@ public interface UrlEntityMapper {
     Url toDomain(UrlEntity entity);
 
     UrlEntity toEntity(Url domain);
+
 }

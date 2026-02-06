@@ -5,9 +5,7 @@ import br.com.encurteMe.application.port.out.UrlRepositoryPort;
 import br.com.encurteMe.domain.model.Url;
 import jakarta.transaction.Transactional;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.springframework.stereotype.Service;
 
-@Service
 public class CreateShortUrlService implements CreateShortUrlCase {
 
     private final UrlRepositoryPort repository;
