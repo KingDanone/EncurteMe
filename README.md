@@ -45,3 +45,11 @@ java -jar target/EncurteMe-0.0.1-SNAPSHOT.jar
 
 ## 🏗️ Arquitetura
 O projeto segue os princípios da **Arquitetura Hexagonal (Ports and Adapters)**, garantindo que a regra de negócio seja independente de frameworks e bancos de dados.
+
+## ✒️ Autor
+* **Luis Ricardo Laranjeira Vieira**
+* **GitHub**: [KingDanone](https://github.com/KingDanone)
+* **Email**: lricardolv10@gmail.com
+
+## 📄 Licença
+Este projeto está sob a licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
