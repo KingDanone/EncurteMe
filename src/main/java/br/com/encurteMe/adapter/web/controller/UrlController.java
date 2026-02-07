@@ -64,7 +64,7 @@ public class UrlController {
                 .build();
     }
 
-    @DeleteMapping
+    @DeleteMapping("/remove")
     @Operation(summary = "Deleta todas as URLs",
             description = "Deleta todas as URLs salvas")
     public ResponseEntity<Void> deleteAll() {

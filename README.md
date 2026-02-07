@@ -16,6 +16,7 @@ Crie um arquivo `.env` na raiz do projeto (o projeto já ignora este arquivo no 
 DB_URL=jdbc:postgresql://localhost:5432/nome_do_seu_banco
 DB_USERNAME=seu_usuario
 DB_PASSWORD=sua_senha
+SERVER_PORT=8080
 BASE_URL=http://localhost:8080
 ```
 
@@ -37,10 +38,10 @@ java -jar target/EncurteMe-0.0.1-SNAPSHOT.jar
 
 ## 📍 Endpoints Principais
 
-* **POST** `/api/v1/shortener`: Encurta uma URL original.
-* **GET** `/api/v1/{codigo}`: Redireciona para a URL original.
-* **GET** `/api/v1/list`: Lista todas as URLs (paginado).
-* **DELETE** `/api/v1`: Remove todos os registros.
+* **POST** `/api/shortener`: Encurta uma URL original.
+* **GET** `/api/{codigo}`: Redireciona para a URL original.
+* **GET** `/api/list`: Lista todas as URLs (paginado).
+* **DELETE** `/api/remove`: Remove todos os registros.
 * **Swagger UI**: `http://localhost:8080/swagger-ui/index.html`
 
 ## 🏗️ Arquitetura

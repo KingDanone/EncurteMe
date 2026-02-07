@@ -22,7 +22,7 @@ public record UrlDTO(
         @Schema(description = "Codigo curto gerado pela API (até 5 caracteres)", accessMode = Schema.AccessMode.READ_ONLY, example = "abc12")
         String codigoEncurtado,
 
-        @Schema(description = "URL encurtada completa", accessMode = Schema.AccessMode.READ_ONLY, example = "http://localhost:8080/v1/abc12")
+        @Schema(description = "URL encurtada completa", accessMode = Schema.AccessMode.READ_ONLY, example = "https://163.176.255.7:8080/api/abc12")
         String urlEncurtada,
 
         @Schema(description = "Data e horario da criação do link curto", accessMode = Schema.AccessMode.READ_ONLY)
