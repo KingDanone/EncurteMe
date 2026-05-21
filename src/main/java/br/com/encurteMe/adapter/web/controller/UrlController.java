@@ -46,8 +46,7 @@ public class UrlController {
     @Operation(summary = "Criar URL encurtada",
             description = "Recebe uma URL e retorna o código encurtado")
     public ResponseEntity<UrlDTO> shorten(@Valid @RequestBody UrlDTO request) {
-        var codigoCurto = createUseCase.execute(request.urlOriginal());
-        Url url = getUrlUseCase.execute(codigoCurto);
+        Url url = createUseCase.execute(request.urlOriginal());
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(mapper.toResponse(url));
@@ -59,7 +58,7 @@ public class UrlController {
     public ResponseEntity<Void> redirect(@PathVariable String codigoEncurtado) {
         Url url = getUrlUseCase.execute(codigoEncurtado);
         return ResponseEntity
-                .status(HttpStatus.MOVED_PERMANENTLY)
+                .status(HttpStatus.FOUND)
                 .location(URI.create(url.getUrlOriginal()))
                 .build();
     }
@@ -77,7 +76,8 @@ public class UrlController {
     public ResponseEntity<List<UrlDTO>> listAll(@RequestParam(defaultValue = "0") int page,
                                                 @RequestParam(defaultValue = "10") int size
     ) {
-        var urls = getAllUrlUseCase.execute(page, size);
+        int limitedSize = Math.min(size, 100);
+        var urls = getAllUrlUseCase.execute(page, limitedSize);
         var response = urls.stream()
                 .map(mapper::toResponse)
                 .toList();

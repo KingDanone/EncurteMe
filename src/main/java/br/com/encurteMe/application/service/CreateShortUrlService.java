@@ -2,6 +2,7 @@ package br.com.encurteMe.application.service;
 
 import br.com.encurteMe.application.port.in.CreateShortUrlCase;
 import br.com.encurteMe.application.port.out.UrlRepositoryPort;
+import br.com.encurteMe.domain.exception.ShortCodeGenerationException;
 import br.com.encurteMe.domain.model.Url;
 import jakarta.transaction.Transactional;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -16,11 +17,10 @@ public class CreateShortUrlService implements CreateShortUrlCase {
 
     @Transactional
     @Override
-    public String execute(String urlOriginal) {
+    public Url execute(String urlOriginal) {
         String codigoCurto = gerarCodigoUnico();
         Url url = Url.create(urlOriginal, codigoCurto);
-        repository.save(url);
-        return codigoCurto;
+        return repository.save(url);
     }
 
     private String gerarCodigoUnico() {
@@ -35,9 +35,6 @@ public class CreateShortUrlService implements CreateShortUrlCase {
             }
         }
 
-        throw new RuntimeException(
-                "Falha ao gerar código unico de pois de "
-                        + maxTentativas + " tentativas"
-        );
+        throw new ShortCodeGenerationException(maxTentativas);
     }
 }

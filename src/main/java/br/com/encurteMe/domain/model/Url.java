@@ -66,8 +66,7 @@ public class Url {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Url url = (Url) o;
-        boolean equals = Objects.equals(codigoEncurtado, codigoEncurtado);
-        return equals;
+        return Objects.equals(this.codigoEncurtado, url.codigoEncurtado);
     }
 
     @Override
