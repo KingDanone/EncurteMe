@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EncurteMe — Encurtador de URLs Gratuito e Rapido</title>
+  <meta name="description" content="EncurteMe e um encurtador de URLs gratuito e rapido. Transforme links longos em URLs curtas e faceis de compartilhar. Sem cadastro, sem complicacao." />
+  <meta name="keywords" content="encurtador de url, link curto, encurtar link, url shortener, link encurtado, gratuito" />
+  <meta name="author" content="Ricardo" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://encurteme.com" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="EncurteMe — Encurtador de URLs Gratuito" />
+  <meta property="og:description" content="Transforme links longos em URLs curtas e faceis de compartilhar. Rapido, gratuito e sem cadastro." />
+  <meta property="og:url" content="https://encurteme.com" />
+  <meta property="og:site_name" content="EncurteMe" />
+  <meta property="og:locale" content="pt_BR" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="EncurteMe — Encurtador de URLs Gratuito" />
+  <meta name="twitter:description" content="Transforme links longos em URLs curtas e faceis de compartilhar. Rapido, gratuito e sem cadastro." />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "EncurteMe",
+    "description": "Encurtador de URLs gratuito e rapido",
+    "url": "https://encurteme.com",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "BRL"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Ricardo",
+      "url": "https://github.com/KingDanone"
+    }
+  }
+  </script>
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔗</text></svg>" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div class="container">
+
+    <header>
+      <h1>Encurte<span>Me</span></h1>
+      <p>Encurtador de URLs — simples, rapido e gratuito</p>
+    </header>
+
+    <main>
+      <section class="card" aria-label="Encurtar URL">
+        <h2>Nova URL</h2>
+        <div class="input-row">
+          <input
+            type="url"
+            id="url-input"
+            placeholder="https://exemplo.com/link-muito-longo"
+            autocomplete="off"
+            aria-label="URL original"
+          />
+          <button class="btn-primary" id="shorten-btn" onclick="encurtarURL()">
+            Encurtar
+          </button>
+        </div>
+        <div class="result-box" id="result-box">
+          <a id="result-link" href="#" target="_blank" rel="noopener"></a>
+          <button class="copy-btn" onclick="copiarLink()">Copiar</button>
+        </div>
+        <div class="error-box" id="error-box"></div>
+      </section>
+
+      <section class="card" aria-label="URLs encurtadas">
+        <div class="list-header">
+          <h2>URLs encurtadas</h2>
+          <div class="list-controls">
+            <button class="btn-ghost" style="height:32px;padding:0 12px;font-size:0.8rem" onclick="carregarLista(true)">
+              Atualizar
+            </button>
+            <button class="btn-danger" style="height:32px;padding:0 12px;font-size:0.8rem" onclick="confirmarRemocao()">
+              Remover tudo
+            </button>
+          </div>
+        </div>
+        <div id="list-container">
+          <div class="loading">Carregando...</div>
+        </div>
+        <div id="pagination" class="pagination"></div>
+      </section>
+
+      <section class="card" aria-label="Como funciona">
+        <h2>Como funciona</h2>
+        <div class="how-it-works">
+          <div class="step">
+            <div class="step-number">1</div>
+            <h3>Cole a URL</h3>
+            <p>Cole o link longo que deseja encurtar no campo acima</p>
+          </div>
+          <div class="step">
+            <div class="step-number">2</div>
+            <h3>Encurte</h3>
+            <p>Clique em "Encurtar" e receba sua URL curta instantaneamente</p>
+          </div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <h3>Compartilhe</h3>
+            <p>Copie o link curto e compartilhe onde quiser</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" aria-label="Perguntas frequentes">
+        <h2>Perguntas frequentes</h2>
+        <div class="faq-list" itemscope itemtype="https://schema.org/FAQPage">
+          <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+              <span itemprop="name">O EncurteMe e gratuito?</span>
+              <span class="faq-icon">&#9660;</span>
+            </button>
+            <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+              <span itemprop="text">Sim, o EncurteMe e completamente gratuito. Nao exigimos cadastro, limite de uso ou pagamento. Basta colar a URL e encurtar.</span>
+            </div>
+          </div>
+          <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+              <span itemprop="name">Por quanto tempo os links ficam ativos?</span>
+              <span class="faq-icon">&#9660;</span>
+            </button>
+            <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+              <span itemprop="text">Os links encurtados nao expiram. Eles permanecem ativos indefinidamente, a menos que sejam removidos manualmente.</span>
+            </div>
+          </div>
+          <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+              <span itemprop="name">Posso personalizar o link encurtado?</span>
+              <span class="faq-icon">&#9660;</span>
+            </button>
+            <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+              <span itemprop="text">Atualmente o codigo e gerado automaticamente com 5 caracteres alfanumericos. Planejamos adicionar personalizacao futura.</span>
+            </div>
+          </div>
+          <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+              <span itemprop="name">E seguro usar o EncurteMe?</span>
+              <span class="faq-icon">&#9660;</span>
+            </button>
+            <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+              <span itemprop="text">Sim. O EncurteMe nao coleta dados pessoais e redireciona diretamente para a URL original sem intermediarios ou rastreamento.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Feito com codigo limpo por <a href="https://github.com/KingDanone" target="_blank" rel="noopener">Ricardo</a></p>
+      <p style="margin-top:0.25rem"><a href="/swagger-ui" target="_blank">API Docs</a> &middot; <a href="https://github.com/KingDanone/EncurteMe" target="_blank" rel="noopener">GitHub</a></p>
+    </footer>
+
+  </div>
+
+  <div class="confirm-overlay" id="confirm-overlay">
+    <div class="confirm-dialog">
+      <h3>Remover todas as URLs?</h3>
+      <p>Essa acao e irreversivel. Todos os registros serao excluidos permanentemente.</p>
+      <div class="confirm-actions">
+        <button class="btn-ghost" onclick="fecharConfirm()">Cancelar</button>
+        <button class="btn-danger" onclick="removerTudo()">Sim, remover tudo</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/app.js"></script>
+</body>
+</html>
