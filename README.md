@@ -106,27 +106,6 @@ A aplicacao estara disponivel em `http://localhost:8080`.
 | `DELETE` | `/api/remove` | Remove todos os registros |
 | `GET` | `/swagger-ui` | Documentacao interativa |
 
-### Exemplo de uso
-
-```bash
-# Criar URL curta
-curl -X POST http://localhost:8080/api/shortener \
-  -H "Content-Type: application/json" \
-  -d '{"urlOriginal":"https://github.com/KingDanone"}'
-
-# Resposta:
-# {
-#   "urlEncurtada": "http://localhost:8080/api/abc12",
-#   "codigoEncurtado": "abc12",
-#   "click": 0
-# }
-
-# Acessar redirect
-curl -I http://localhost:8080/api/abc12
-# HTTP/1.1 302 Found
-# Location: https://github.com/KingDanone
-```
-
 ## Deploy na VPS
 
 A aplicacao roda como servico systemd em uma Oracle Cloud VPS (Ubuntu 22.04, 1GB RAM) com PostgreSQL em Docker:
@@ -148,15 +127,6 @@ RestartSec=10
 [Install]
 WantedBy=multi-user.target
 ```
-
-## Screenshots
-
-Para adicionar screenshots ao README, coloque imagens PNG em `.github/screenshots/`:
-
-| Arquivo | Descricao |
-|---|---|
-| `landing-light.png` | Landing page em modo claro |
-| `landing-dark.png` | Landing page em modo escuro |
 
 ## Autor
 
